@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Data
@@ -13,7 +14,7 @@ public class AddressBook {
 
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
     private String firstName;
@@ -23,7 +24,7 @@ public class AddressBook {
     private String city;
     private String state;
     private Integer zip;
-    
+
 
     //Created constructor for save-address method
     public AddressBook(AddressBookDTO addressBookDTO) {

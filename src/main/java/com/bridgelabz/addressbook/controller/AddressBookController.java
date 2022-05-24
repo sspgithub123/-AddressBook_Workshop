@@ -3,7 +3,7 @@ package com.bridgelabz.addressbook.controller;
 import com.bridgelabz.addressbook.dto.AddressBookDTO;
 import com.bridgelabz.addressbook.dto.ResponseDTO;
 import com.bridgelabz.addressbook.model.AddressBook;
-import com.bridgelabz.addressbook.service.AddressBookService;
+import com.bridgelabz.addressbook.service.IAddressBookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +22,7 @@ public class AddressBookController {
      * @Autowired annotation act as a dependency injection we can inject object of another class
      */
     @Autowired
-    AddressBookService service;
+    IAddressBookService service;
 
     @GetMapping("/hello")
     public String getMessage() {
@@ -45,7 +45,7 @@ public class AddressBookController {
 
     @GetMapping("/get-by/{id}")
     public ResponseEntity<AddressBook> getAddressById(@PathVariable Integer id) {
-        ResponseDTO response = new ResponseDTO("Address-book of given id: ", service.getAddressbyId(id));
+        ResponseDTO response = new ResponseDTO("Address-book of given id: ", service.getDataById(id));
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
