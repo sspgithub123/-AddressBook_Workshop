@@ -11,7 +11,7 @@ import java.util.Optional;
 
 
 @Service
-public class AddressBookService {
+public class AddressBookService implements IAddressBookService {
 
     //Autowired repository class to inject its dependency
     @Autowired
@@ -19,8 +19,8 @@ public class AddressBookService {
 
     //Created service method which serves controller api to retrieve all records
     public List<AddressBook> getListOfAddresses() {
-        List<AddressBook> addressBooks = repository.findAll();
-        return addressBooks;
+        List<AddressBook> list = repository.findAll();
+        return list;
     }
 
     //Created service method which serves controller api to post data
@@ -31,9 +31,9 @@ public class AddressBookService {
     }
 
     //Created service method which serves controller api to get record by id
-    public AddressBook getAddressbyId(Integer id) {
-        Optional<AddressBook> addressBook = repository.findById(id);
-        return addressBook.get();
+    public Optional<AddressBook> getDataById(Integer id) {
+        Optional<AddressBook> newAddressBook = repository.findById(id);
+        return newAddressBook;
     }
 
     //Created service method which serves controller api to update record by id
