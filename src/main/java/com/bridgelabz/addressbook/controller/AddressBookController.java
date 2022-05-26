@@ -4,6 +4,7 @@ import com.bridgelabz.addressbook.dto.AddressBookDTO;
 import com.bridgelabz.addressbook.dto.ResponseDTO;
 import com.bridgelabz.addressbook.model.AddressBook;
 import com.bridgelabz.addressbook.service.IAddressBookService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import java.util.List;
 /**
  * In Controller class we write the API's here
  */
+@Slf4j
 @RestController
 @RequestMapping("/address-book")
 public class AddressBookController {
@@ -64,7 +66,7 @@ public class AddressBookController {
      */
     @GetMapping("/get-by/{id}")
     public ResponseEntity<AddressBook> getAddressById(@PathVariable Integer id) {
-        ResponseDTO response = new ResponseDTO("Address-book of given id: ", service.getAddressById(id));
+        ResponseDTO response = new ResponseDTO("Address-book of given id: ", service.getDataById(id));
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
@@ -90,5 +92,12 @@ public class AddressBookController {
     public ResponseEntity<String> deleteDataById(@PathVariable Integer id) {
         service.deleteContact(id);
         return new ResponseEntity<String>("Contact deleted successfully", HttpStatus.OK);
+    }
+
+    @GetMapping("/get-by-city/{city}")
+    public ResponseEntity<ResponseDTO> findByCity(@PathVariable("city") String city){
+        List<AddressBook> listOfContacts = service.findByCity(city);
+        ResponseDTO response = new ResponseDTO("Get Call for ID successful", listOfContacts);
+        return new ResponseEntity(response,HttpStatus.OK);
     }
 }

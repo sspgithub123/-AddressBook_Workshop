@@ -71,8 +71,9 @@ public class AddressBookService implements IAddressBookService {
     }
 
     @Override
-    public Object getAddressById(Integer id) {
-        return null;
+    public List<AddressBook> findByCity(String city) {
+        return repository.findByCity(city);
+
     }
 
 }
