@@ -3,10 +3,8 @@ package com.bridgelabz.addressbook.model;
 import com.bridgelabz.addressbook.dto.AddressBookDTO;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  *Created Model class AddressBook with different fields
@@ -21,7 +19,9 @@ public class AddressBook {
     private String lastName;
     private String email;
     private Long phoneNumber;
-    private String city;
+    @ElementCollection
+    @CollectionTable(name = "city",joinColumns = @JoinColumn(name = "id"))
+    private List<String> city;
     private String state;
     private Integer zip;
 
